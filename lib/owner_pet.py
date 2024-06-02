@@ -8,11 +8,10 @@ class Pet:
         else:
             self.pet_type = pet_type
         self.name = name
-        self.owner = owner
-        self.all.append(self)
         if owner:
             owner.add_pet(self)
-
+        self.owner = owner
+        self.all.append(self)
 class Owner:
     def __init__(self, name):
         self.name = name
@@ -22,9 +21,8 @@ class Owner:
         return self.pets_list
 
     def add_pet(self, pet):
-        if not isinstance(pet, Pet):
-            raise Exception("Invalid pet object")
         self.pets_list.append(pet)
+        pet.owner = self
 
     def get_sorted_pets(self):
         sorted_pets = sorted(self.pets_list, key=lambda pet: pet.name)
