@@ -21,8 +21,11 @@ class Owner:
         return self.pets_list
 
     def add_pet(self, pet):
-        self.pets_list.append(pet)
-        pet.owner = self
+        if isinstance(pet, Pet):
+            self.pets_list.append(pet)
+            pet.owner = self
+        else:
+            raise Exception("Invalid pet type")
 
     def get_sorted_pets(self):
         sorted_pets = sorted(self.pets_list, key=lambda pet: pet.name)
